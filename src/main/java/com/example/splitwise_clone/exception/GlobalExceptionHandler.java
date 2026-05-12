@@ -21,4 +21,11 @@ public class GlobalExceptionHandler {
                         "error", ex.getMessage()
                 ));
     }
+
+    @ExceptionHandler(org.springframework.security.authentication.BadCredentialsException.class)
+    public ResponseEntity<?> handleBadCredentials(Exception ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of(
+                "error", "Invalid email or password"
+        ));
+    }
 }
